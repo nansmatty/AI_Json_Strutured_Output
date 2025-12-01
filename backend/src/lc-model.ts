@@ -16,21 +16,21 @@ export function createChatModel(): { provider: Provider; model: any } {
 
 	const base = { temperature: 0 as const };
 
-	if (provider === 'openai' && hasOpenAIKey) {
+	if (provider === 'openai' || (!provider && hasOpenAIKey)) {
 		return {
 			provider: 'openai',
 			model: new ChatOpenAI({ ...base, model: 'gpt-4o-mini' }),
 		};
 	}
 
-	if (provider === 'gemini' && hasGeminiKey) {
+	if (provider === 'gemini' || (!provider && hasGeminiKey)) {
 		return {
 			provider: 'gemini',
-			model: new ChatGoogleGenerativeAI({ ...base, model: 'gemini-2.0-flash-lite', maxOutputTokens: 2048 }),
+			model: new ChatGoogleGenerativeAI({ ...base, model: 'gemini-2.0-flash-lite' }),
 		};
 	}
 
-	if (provider === 'groq' && hasGroqKey) {
+	if (provider === 'groq' || (!provider && hasGroqKey)) {
 		return {
 			provider: 'groq',
 			model: new ChatGroq({ ...base, model: 'llama-3.1-8b-instant' }),
