@@ -4,13 +4,13 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:600
 
 export async function POST(req: Request) {
 	try {
-		const body = await req.json();
+		const askBody = await req.json();
 		const apiResponse = await fetch(`${BACKEND_URL}/ask`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(body),
+			body: JSON.stringify(askBody),
 		});
 
 		const data = await apiResponse.json();
@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 		return NextResponse.json(data, { status: apiResponse.status });
 	} catch (error) {
 		return NextResponse.json({
-			error: 'Some error occurred.',
+			error: `Some error occurred. ${error}`,
 		});
 	}
 }
