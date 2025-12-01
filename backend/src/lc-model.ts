@@ -26,7 +26,7 @@ export function createChatModel(): { provider: Provider; model: any } {
 	if (provider === 'gemini' || (!provider && hasGeminiKey)) {
 		return {
 			provider: 'gemini',
-			model: new ChatGoogleGenerativeAI({ ...base, model: 'gemini-2.0-flash-lite' }),
+			model: new ChatGoogleGenerativeAI({ ...base, model: 'gemini-2.5-flash-lite' }),
 		};
 	}
 
